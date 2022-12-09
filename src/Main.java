@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -23,8 +22,6 @@ public class Main {
             array[i]=scannerStrok.nextLine();
 
         }
-
-        String numberOfLine; //строка, содержащая номера строк с разными символами
 
         int l=0;
         char[] stroka;
@@ -56,13 +53,18 @@ public class Main {
         //получили несколько строк где нет совпадений и их номера
         //System.out.println("Номера строк где нет совпадений: "+ nomeraStrok);
 
-
+        if (nomeraStrok.length()==0) {
+            System.out.println("Нет строк, удовлетворяющих запросу");
+        }
         //вывести первую строку из полученных
-        String result = "";
-        int nomerStroki = Integer.parseInt(nomeraStrok.substring(0,1));
+        else if (nomeraStrok.length()>0) {
+            String result = "";
+            int nomerStroki = Integer.parseInt(nomeraStrok.substring(0,1));
 
-        result= array[nomerStroki];
-        System.out.println("Ответ: " + result);
+            result= array[nomerStroki];
+            System.out.println("Ответ: " + result);
+        }
+
 
     }
 }
