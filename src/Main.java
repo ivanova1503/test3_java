@@ -23,48 +23,45 @@ public class Main {
 
         }
 
-        int l=0;
         char[] stroka;
-        String nomeraStrok=""; //записывает номера строк, в которых нет совпадений
-        for (int i=0; i<array.length;i++) {
-            //получить длину строки каждого элемента массива
-            l=array[i].length();
-            //заполнить новый массив символами из строки элемента
-            stroka = array[i].toCharArray();
-            boolean sovpadeniya = false; //записывает, есть ли совпадения в строке
 
+        int count;//количество разных букв
+
+        int[] array1 = new int[n];
+
+        for (int i=0; i<array.length;i++) {
+
+            stroka = array[i].toCharArray();
+            count=0;
+            boolean povtoreniya = false;
             for (int j=0; j< stroka.length; j++) { //берем каждую букву и сравниваем с остальными, есть ли совпадения
-                for (int k=0; k< stroka.length;k++) {
-                    if ((stroka[j]==stroka[k])&&(j!=k))  {
-                       sovpadeniya=true;
-                       break;
-                    }
-                    else {
+                for (int k=0; k< stroka.length;k++) { //если одна буква не равна всем остальным, то увеличить счетчик
+                    if ((stroka[j]!=stroka[k]) && (j!=k))  {
                         continue;
                     }
+                    else if ((stroka[j]==stroka[k]) && (j!=k)) {
+                        povtoreniya=true;
+                    }
                 }
+                if (povtoreniya==false) {
+                    count++;
+                }
+
             }
-            if (sovpadeniya==false) {
-                nomeraStrok+= Integer.toString(i);
+            //System.out.println(count);
+            array1[i]=count;
+        }
+
+        //найти большее число в массиве array1
+        int result=0; // номер строки, в которйо находится значение max
+        int max=array1[0];
+        for (int i=1; i< array1.length; i++) {
+            if (array1[i]>max) {
+                max = array1[i];
+                result=i;
             }
-
         }
-
-        //получили несколько строк где нет совпадений и их номера
-        //System.out.println("Номера строк где нет совпадений: "+ nomeraStrok);
-
-        if (nomeraStrok.length()==0) {
-            System.out.println("Нет строк, удовлетворяющих запросу");
-        }
-        //вывести первую строку из полученных
-        else if (nomeraStrok.length()>0) {
-            String result = "";
-            int nomerStroki = Integer.parseInt(nomeraStrok.substring(0,1));
-
-            result= array[nomerStroki];
-            System.out.println("Ответ: " + result);
-        }
-
-
+        System.out.println("Максимальное число неповторяющихся букв находится в строке с индексом:"+result);
+        System.out.println("Результат: " + array[result]);
     }
 }
